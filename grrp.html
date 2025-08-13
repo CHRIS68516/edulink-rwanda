@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduLink Rwanda</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #00A651;
+      --secondary: #F9A825;
+      --dark: #1E3A8A;
+      --light: #F8FAFC;
+      --danger: #DC2626;
+      --bg-color: #f5f5f5;
+      --text-color: #333;
+      --card-bg: white;
+      --border-color: #ddd;
+    }
+    
+    .dark-mode {
+      --bg-color: #1a1a1a;
+      --text-color: #f0f0f0;
+      --card-bg: #2d2d2d;
+      --border-color: #444;
+      --dark: #3b82f6;
+      --light: #1e293b;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      transition: all 0.3s ease;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--dark));
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    header h1 {
+      font-size: 1.8rem;
+    }
+    
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    
+    nav a:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+    
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    section {
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background-color: var(--secondary);
+    }
+    
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 5rem 2rem;
+      border-radius: 8px;
+      margin: 2rem auto;
+    }
+    
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .btn:hover {
+      background-color: #008a43;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .btn-secondary {
+      background-color: var(--secondary);
+    }
+    
+    .btn-secondary:hover {
+      background-color: #e69500;
+    }
+    
+    .university-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .university {
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      border: 1px solid var(--border-color);
+    }
+    
+    .university:hover {
+      transform: translateY(-5px);
+    }
+    
+    .university img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      padding: 1rem;
+      background-color: white;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .university-content {
+      padding: 1.5rem;
+    }
+    
+    .university h3 {
+      margin-bottom: 0.5rem;
+      color: var(--dark);
+    }
+    
+    .university a {
+      display: inline-block;
+      margin-top: 1rem;
+      color: var(--primary);
+      font-weight: 500;
+      text-decoration: none;
+    }
+    
+    .university a:hover {
+      text-decoration: underline;
+    }
+    
+    form {
+      background-color: var(--card-bg);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      max-width: 800px;
+      margin: 0 auto;
+      border: 1px solid var(--border-color);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--dark);
+    }
+    
+    input, textarea, select {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-size: 1rem;
+      background-color: var(--card-bg);
+      color: var(--text-color);
+    }
+    
+    textarea {
+      min-height: 120px;
+    }
+    
+    .form-row {
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    .form-row .form-group {
+      flex: 1;
+    }
+    
+    .requirements-list {
+      background-color: var(--card-bg);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-top: 2rem;
+      border: 1px solid var(--border-color);
+    }
+    
+    .requirements-list h3 {
+      margin-bottom: 1rem;
+      color: var(--dark);
+    }
+    
+    .requirements-list ul {
+      list-style-type: none;
+    }
+    
+    .requirements-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .requirements-list li:last-child {
+      border-bottom: none;
+    }
+    
+    .status {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    .status-pending {
+      background-color: #FEF3C7;
+      color: #92400E;
+    }
+    
+    .status-approved {
+      background-color: #D1FAE5;
+      color: #065F46;
+    }
+    
+    .status-rejected {
+      background-color: #FEE2E2;
+      color: #991B1B;
+    }
+    
+    .dashboard {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 2rem;
+    }
+    
+    .sidebar {
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+    }
+    
+    .sidebar-menu {
+      list-style-type: none;
+    }
+    
+    .sidebar-menu li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .sidebar-menu a {
+      display: block;
+      padding: 0.8rem 1rem;
+      color: var(--text-color);
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    
+    .sidebar-menu a:hover, .sidebar-menu a.active {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .sidebar-menu i {
+      margin-right: 0.5rem;
+      width: 20px;
+      text-align: center;
+    }
+    
+    .main-content {
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 2rem;
+      border: 1px solid var(--border-color);
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .stat-card {
+      background-color: var(--light);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      border-left: 4px solid var(--primary);
+    }
+    
+    .stat-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--dark);
+    }
+    
+    .stat-card p {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--primary);
+    }
+    
+    .applications-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+    }
+    
+    .applications-table th, .applications-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .applications-table th {
+      background-color: var(--light);
+      font-weight: 500;
+      color: var(--dark);
+    }
+    
+    .applications-table tr:hover {
+      background-color: var(--light);
+    }
+    
+    .action-btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .view-btn {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .view-btn:hover {
+      background-color: #008a43;
+    }
+    
+    .edit-btn {
+      background-color: var(--secondary);
+      color: white;
+    }
+    
+    .edit-btn:hover {
+      background-color: #e69500;
+    }
+    
+    .delete-btn {
+      background-color: var(--danger);
+      color: white;
+    }
+    
+    .delete-btn:hover {
+      background-color: #b91c1c;
+    }
+    
+    .profile-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    
+    .profile-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: var(--secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: white;
+      margin-right: 2rem;
+    }
+    
+    .profile-info h2 {
+      margin-bottom: 0.5rem;
+      padding-bottom: 0;
+    }
+    
+    .profile-info h2::after {
+      display: none;
+    }
+    
+    .profile-info p {
+      color: #666;
+    }
+    
+    .profile-section {
+      margin-bottom: 2rem;
+    }
+    
+    .profile-section h3 {
+      margin-bottom: 1rem;
+      color: var(--dark);
+      font-size: 1.3rem;
+    }
+    
+    .profile-details {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    
+    .detail-item {
+      background-color: var(--light);
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    
+    .detail-item h4 {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .detail-item p {
+      font-weight: 500;
+    }
+    
+    .documents-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .document-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .document-card:hover {
+      border-color: var(--primary);
+    }
+    
+    .document-icon {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    
+    .document-actions {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .university-search {
+      display: flex;
+      margin-bottom: 2rem;
+      gap: 1rem;
+    }
+    
+    .university-search input {
+      flex: 1;
+    }
+    
+    .filters {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .filter-group {
+      flex: 1;
+    }
+    
+    .filter-btn {
+      background-color: var(--light);
+      border: 1px solid var(--border-color);
+      padding: 0.8rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--text-color);
+    }
+    
+    .filter-btn.active {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    
+    footer {
+      background-color: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+    }
+    
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .social-icons a {
+      color: white;
+      font-size: 1.5rem;
+    }
+    
+    /* Login Page Styles */
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+    }
+    
+    .login-box {
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 2rem;
+      width: 100%;
+      max-width: 500px;
+      border: 1px solid var(--border-color);
+    }
+    
+    .login-tabs {
+      display: flex;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .login-tab {
+      padding: 0.8rem 1.5rem;
+      cursor: pointer;
+      font-weight: 500;
+      border-bottom: 3px solid transparent;
+    }
+    
+    .login-tab.active {
+      border-bottom: 3px solid var(--primary);
+      color: var(--primary);
+    }
+    
+    .login-form {
+      display: none;
+    }
+    
+    .login-form.active {
+      display: block;
+    }
+    
+    .login-social {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .social-login-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .google-btn {
+      background-color: #fff;
+      color: #333;
+      border: 1px solid var(--border-color);
+    }
+    
+    .google-btn:hover {
+      background-color: #f1f1f1;
+    }
+    
+    .facebook-btn {
+      background-color: #3b5998;
+      color: white;
+      border: 1px solid #3b5998;
+    }
+    
+    .facebook-btn:hover {
+      background-color: #344e86;
+    }
+    
+    .login-divider {
+      display: flex;
+      align-items: center;
+      margin: 1.5rem 0;
+      color: #666;
+    }
+    
+    .login-divider::before, .login-divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .login-divider::before {
+      margin-right: 1rem;
+    }
+    
+    .login-divider::after {
+      margin-left: 1rem;
+    }
+    
+    .forgot-password {
+      text-align: right;
+      margin-top: -1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .forgot-password a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    
+    /* Settings Page Styles */
+    .settings-section {
+      margin-bottom: 2rem;
+    }
+    
+    .settings-section h3 {
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .settings-option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .settings-option:last-child {
+      border-bottom: none;
+    }
+    
+    .settings-option .description {
+      color: #666;
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+    }
+    
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+    
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 24px;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+      background-color: var(--primary);
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    
+    .language-selector {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .language-option {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .language-option.active {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    
+    .notification-settings {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .notification-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .account-delete {
+      color: var(--danger);
+      padding: 1rem 0;
+      border-top: 1px solid var(--border-color);
+      margin-top: 1rem;
+    }
+    
+    .account-delete a {
+      color: var(--danger);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      
+      nav {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .dashboard {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .profile-details {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+      
+      .filters {
+        flex-wrap: wrap;
+      }
+      
+      .filter-group {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Page (Initially hidden) -->
+  <section id="login-page" style="display: none;">
+    <div class="login-container">
+      <div class="login-box">
+        <div class="login-tabs">
+          <div class="login-tab active" data-tab="login">Login</div>
+          <div class="login-tab" data-tab="register">Register</div>
+        </div>
+        
+        <!-- Login Form -->
+        <div class="login-form active" id="login-form">
+          <form>
+            <div class="form-group">
+              <label for="login-email">Email</label>
+              <input type="email" id="login-email" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <input type="password" id="login-password" placeholder="Enter your password" required>
+            </div>
+            
+            <div class="forgot-password">
+              <a href="#forgot-password">Forgot password?</a>
+            </div>
+            
+            <button type="submit" class="btn" style="width: 100%;">Login</button>
+            
+            <div class="login-divider">or continue with</div>
+            
+            <div class="login-social">
+              <button type="button" class="social-login-btn google-btn">
+                <i class="fab fa-google"></i> Google
+              </button>
+              <button type="button" class="social-login-btn facebook-btn">
+                <i class="fab fa-facebook-f"></i> Facebook
+              </button>
+            </div>
+          </form>
+        </div>
+        
+        <!-- Registration Form -->
+        <div class="login-form" id="register-form">
+          <form>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" placeholder="Enter your first name" required>
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" placeholder="Enter your last name" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="register-email">Email</label>
+              <input type="email" id="register-email" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="register-password">Password</label>
+              <input type="password" id="register-password" placeholder="Create a password" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="confirm-password">Confirm Password</label>
+              <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="user-type">I am a:</label>
+              <select id="user-type" required>
+                <option value="">Select user type</option>
+                <option value="student">Student</option>
+                <option value="parent">Parent</option>
+                <option value="counselor">Counselor</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <input type="checkbox" id="terms" required>
+              <label for="terms" style="display: inline;">I agree to the <a href="#terms">Terms of Service</a> and <a href="#privacy">Privacy Policy</a></label>
+            </div>
+            
+            <button type="submit" class="btn" style="width: 100%;">Create Account</button>
+            
+            <div class="login-divider">or sign up with</div>
+            
+            <div class="login-social">
+              <button type="button" class="social-login-btn google-btn">
+                <i class="fab fa-google"></i> Google
+              </button>
+              <button type="button" class="social-login-btn facebook-btn">
+                <i class="fab fa-facebook-f"></i> Facebook
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Application (Initially hidden) -->
+  <div id="main-app">
+    <header>
+      <h1>EduLink Rwanda</h1>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#universities">Universities</a>
+        <a href="#applications">Applications</a>
+        <a href="#profile">Profile</a>
+        <a href="#scholarships">Scholarships</a>
+      </nav>
+      <div class="user-menu">
+        <div class="user-avatar">JD</div>
+      </div>
+    </header>
+
+    <section id="home">
+      <div class="hero">
+        <h2>Empowering Rwandan Students</h2>
+        <p>Connect with top global universities, apply for scholarships, and receive school supplies - all in one platform.</p>
+        <a href="#profile" class="btn">Complete Your Profile</a>
+        <a href="#universities" class="btn btn-secondary">Explore Universities</a>
+      </div>
+    </section>
+
+    <!-- Dashboard Section (Visible after login) -->
+    <section id="dashboard" class="dashboard-section">
+      <div class="dashboard">
+        <div class="sidebar">
+          <ul class="sidebar-menu">
+            <li><a href="#dashboard" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="#profile"><i class="fas fa-user"></i> My Profile</a></li>
+            <li><a href="#applications"><i class="fas fa-file-alt"></i> Applications</a></li>
+            <li><a href="#documents"><i class="fas fa-file-upload"></i> Documents</a></li>
+            <li><a href="#scholarships"><i class="fas fa-award"></i> Scholarships</a></li>
+            <li><a href="#messages"><i class="fas fa-envelope"></i> Messages</a></li>
+            <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="#logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+          </ul>
+        </div>
+        
+        <div class="main-content">
+          <h2>Student Dashboard</h2>
+          <p>Welcome back, John Doe! Here's your application overview.</p>
+          
+          <div class="stats-grid">
+            <div class="stat-card">
+              <h3>Applications Submitted</h3>
+              <p>5</p>
+            </div>
+            <div class="stat-card">
+              <h3>Pending Decisions</h3>
+              <p>3</p>
+            </div>
+            <div class="stat-card">
+              <h3>Acceptances</h3>
+              <p>2</p>
+            </div>
+          </div>
+          
+          <h3>Recent Applications</h3>
+          <table class="applications-table">
+            <thead>
+              <tr>
+                <th>University</th>
+                <th>Program</th>
+                <th>Status</th>
+                <th>Deadline</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Yale University</td>
+                <td>Computer Science</td>
+                <td><span class="status status-approved">Accepted</span></td>
+                <td>Jan 15, 2025</td>
+                <td>
+                  <button class="action-btn view-btn">View</button>
+                  <button class="action-btn edit-btn">Edit</button>
+                </td>
+              </tr>
+              <tr>
+                <td>University of Oxford</td>
+                <td>Economics</td>
+                <td><span class="status status-pending">Under Review</span></td>
+                <td>Feb 1, 2025</td>
+                <td>
+                  <button class="action-btn view-btn">View</button>
+                  <button class="action-btn edit-btn">Edit</button>
+                </td>
+              </tr>
+              <tr>
+                <td>African Leadership University</td>
+                <td>Global Challenges</td>
+                <td><span class="status status-approved">Accepted</span></td>
+                <td>Mar 15, 2025</td>
+                <td>
+                  <button class="action-btn view-btn">View</button>
+                  <button class="action-btn edit-btn">Edit</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Princeton University</td>
+                <td>Engineering</td>
+                <td><span class="status status-pending">Under Review</span></td>
+                <td>Jan 30, 2025</td>
+                <td>
+                  <button class="action-btn view-btn">View</button>
+                  <button class="action-btn edit-btn">Edit</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div style="margin-top: 2rem; text-align: center;">
+            <a href="#universities" class="btn">Apply to More Universities</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="universities">
+      <h2>Partner Universities</h2>
+      <p>Browse through our partner universities and find the perfect fit for your academic journey.</p>
+      
+      <div class="university-search">
+        <input type="text" placeholder="Search universities...">
+        <button class="btn">Search</button>
+      </div>
+      
+      <div class="filters">
+        <div class="filter-group">
+          <select>
+            <option>All Countries</option>
+            <option>United States</option>
+            <option>United Kingdom</option>
+            <option>Rwanda</option>
+            <option>Poland</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <select>
+            <option>All Programs</option>
+            <option>Computer Science</option>
+            <option>Engineering</option>
+            <option>Business</option>
+            <option>Medicine</option>
+            <option>Arts & Humanities</option>
+          </select>
+        </div>
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Scholarships Available</button>
+        <button class="filter-btn">No Application Fee</button>
+      </div>
+      
+      <div class="university-grid">
+        <div class="university">
+          <img src="logos/yale.png" alt="Yale Logo">
+          <div class="university-content">
+            <h3>Yale University</h3>
+            <p>New Haven, Connecticut, USA</p>
+            <p><strong>Deadline:</strong> Jan 15, 2025</p>
+            <p><strong>Scholarships:</strong> Available</p>
+            <a href="#apply-yale" class="btn" style="display: block; text-align: center; margin-top: 1rem;">Apply Now</a>
+          </div>
+        </div>
+        
+        <div class="university">
+          <img src="logos/oxford.png" alt="Oxford Logo">
+          <div class="university-content">
+            <h3>University of Oxford</h3>
+            <p>Oxford, United Kingdom</p>
+            <p><strong>Deadline:</strong> Feb 1, 2025</p>
+            <p><strong>Scholarships:</strong> Limited</p>
+            <a href="#apply-oxford" class="btn" style="display: block; text-align: center; margin-top: 1rem;">Apply Now</a>
+          </div>
+        </div>
+        
+        <div class="university">
+          <img src="logos/alu.png" alt="ALU Logo">
+          <div class="university-content">
+            <h3>African Leadership University</h3>
+            <p>Kigali, Rwanda</p>
+            <p><strong>Deadline:</strong> Rolling</p>
+            <p><strong>Scholarships:</strong> Available</p>
+            <a href="#apply-alu" class="btn" style="display: block; text-align: center; margin-top: 1rem;">Apply Now</a>
+          </div>
+        </div>
+        
+        <div class="university">
+          <img src="logos/poland.png" alt="Polish Universities">
+          <div class="university-content">
+            <h3>University of Warsaw</h3>
+            <p>Warsaw, Poland</p>
+            <p><strong>Deadline:</strong> Mar 15, 2025</p>
+            <p><strong>Scholarships:</strong> Available</p>
+            <a href="#apply-warsaw" class="btn" style="display: block; text-align: center; margin-top: 1rem;">Apply Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Application Requirements Section -->
+    <section id="applications">
+      <h2>My University Applications</h2>
+      <p>View and manage all your university applications in one place.</p>
+      
+      <div class="filters" style="margin-top: 1.5rem;">
+        <button class="filter-btn active">All Applications</button>
+        <button class="filter-btn">Pending</button>
+        <button class="filter-btn">Accepted</button>
+        <button class="filter-btn">Rejected</button>
+      </div>
+      
+      <div class="requirements-list">
+        <h3>Application Status Overview</h3>
+        <table class="applications-table">
+          <thead>
+            <tr>
+              <th>University</th>
+              <th>Program</th>
+              <th>Application Date</th>
+              <th>Status</th>
+              <th>Deadline</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Yale University</td>
+              <td>Computer Science</td>
+              <td>Dec 15, 2024</td>
+              <td><span class="status status-approved">Accepted</span></td>
+              <td>Jan 15, 2025</td>
+              <td>
+                <button class="action-btn view-btn">View</button>
+                <button class="action-btn delete-btn">Withdraw</button>
+              </td>
+            </tr>
+            <tr>
+              <td>University of Oxford</td>
+              <td>Economics</td>
+              <td>Jan 5, 2025</td>
+              <td><span class="status status-pending">Under Review</span></td>
+              <td>Feb 1, 2025</td>
+              <td>
+                <button class="action-btn view-btn">View</button>
+                <button class="action-btn delete-btn">Withdraw</button>
+              </td>
+            </tr>
+            <tr>
+              <td>African Leadership University</td>
+              <td>Global Challenges</td>
+              <td>Nov 20, 2024</td>
+              <td><span class="status status-approved">Accepted</span></td>
+              <td>Mar 15, 2025</td>
+              <td>
+                <button class="action-btn view-btn">View</button>
+                <button class="action-btn delete-btn">Withdraw</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Princeton University</td>
+              <td>Engineering</td>
+              <td>Dec 28, 2024</td>
+              <td><span class="status status-pending">Under Review</span></td>
+              <td>Jan 30, 2025</td>
+              <td>
+                <button class="action-btn view-btn">View</button>
+                <button class="action-btn delete-btn">Withdraw</button>
+              </td>
+            </tr>
+            <tr>
+              <td>University of Warsaw</td>
+              <td>Computer Science</td>
+              <td>Jan 10, 2025</td>
+              <td><span class="status status-pending">Under Review</span></td>
+              <td>Mar 1, 2025</td>
+              <td>
+                <button class="action-btn view-btn">View</button>
+                <button class="action-btn delete-btn">Withdraw</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div style="margin-top: 2rem;">
+          <h3>Start New Application</h3>
+          <p>Select a university to begin your application process:</p>
+          
+          <div class="form-group" style="margin-top: 1rem;">
+            <select>
+              <option>Select a university</option>
+              <option>Yale University</option>
+              <option>University of Oxford</option>
+              <option>African Leadership University</option>
+              <option>University of Warsaw</option>
+              <option>Princeton University</option>
+            </select>
+          </div>
+          
+          <button class="btn" style="margin-top: 1rem;">Start Application</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Student Profile Section -->
+    <section id="profile">
+      <div class="profile-header">
+        <div class="profile-avatar">JD</div>
+        <div class="profile-info">
+          <h2>Teta Gaella</h2>
+          <p>Senior Student at Green Hills Academy, Kigali</p>
+          <p>Profile Completion: 85%</p>
+        </div>
+      </div>
+      
+      <div class="profile-details">
+        <div class="detail-item">
+          <h4>Email</h4>
+          <p>tetagaella@gmail.com</p>
+        </div>
+        <div class="detail-item">
+          <h4>Phone</h4>
+          <p>+250 7885 2338</p>
+        </div>
+        <div class="detail-item">
+          <h4>Date of Birth</h4>
+          <p>july 29, 2008</p>
+        </div>
+        <div class="detail-item">
+          <h4>Nationality</h4>
+          <p>Rwandan</p>
+        </div>
+        <div class="detail-item">
+          <h4>Current School</h4>
+          <p>Saint Ignatius High School</p>
+        </div>
+        <div class="detail-item">
+          <h4>Graduation Year</h4>
+          <p>2026</p>
+        </div>
+      </div>
+      
+      <div class="profile-section">
+        <h3>Academic Information</h3>
+        <div class="form-group">
+          <label>Intended Major/Field of Study</label>
+          <input type="text" value="Computer Science">
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>SAT Score</label>
+            <input type="text" value="1480">
+          </div>
+          <div class="form-group">
+            <label>ACT Score</label>
+            <input type="text" value="32">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>English Proficiency Test</label>
+          <select>
+            <option>TOEFL (112)</option>
+            <option>IELTS</option>
+            <option>Duolingo</option>
+            <option>None</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>National Exam Results (If applicable)</label>
+          <input type="text" placeholder="Enter your national exam scores">
+        </div>
+      </div>
+      
+      <div class="profile-section">
+        <h3>Extracurricular Activities</h3>
+        <textarea>President of Computer Club (2023-present)
+Volunteer at Kigali Public Library (Summer 2024)
+Member of School Debate Team (2022-2024)
+Developed a mobile app for local farmers (2023)</textarea>
+      </div>
+      
+      <div class="profile-section">
+        <h3>Awards & Honors</h3>
+        <textarea>1st Place in National Science Fair (2024)
+Best Delegate at Model UN Conference (2023)
+Academic Excellence Award (2022, 2023)
+Chess Club Champion (2023)</textarea>
+      </div>
+      
+      <div class="profile-section">
+        <h3>Uploaded Documents</h3>
+        <div class="documents-list">
+          <div class="document-card">
+            <div class="document-icon">
+              <i class="fas fa-passport"></i>
+            </div>
+            <h4>Passport</h4>
+            <p>Uploaded: Jan 5, 2025</p>
+            <div class="document-actions">
+              <button class="action-btn view-btn">View</button>
+              <button class="action-btn edit-btn">Replace</button>
+            </div>
+          </div>
+          
+          <div class="document-card">
+            <div class="document-icon">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <h4>Transcripts</h4>
+            <p>Uploaded: Jan 7, 2025</p>
+            <div class="document-actions">
+              <button class="action-btn view-btn">View</button>
+              <button class="action-btn edit-btn">Replace</button>
+            </div>
+          </div>
+          
+          <div class="document-card">
+            <div class="document-icon">
+              <i class="fas fa-certificate"></i>
+            </div>
+            <h4>SAT Scores</h4>
+            <p>Uploaded: Jan 10, 2025</p>
+            <div class="document-actions">
+              <button class="action-btn view-btn">View</button>
+              <button class="action-btn edit-btn">Replace</button>
+            </div>
+          </div>
+          
+          <div class="document-card">
+            <div class="document-icon">
+              <i class="fas fa-language"></i>
+            </div>
+            <h4>TOEFL Scores</h4>
+            <p>Uploaded: Jan 12, 2025</p>
+            <div class="document-actions">
+              <button class="action-btn view-btn">View</button>
+              <button class="action-btn edit-btn">Replace</button>
+            </div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 2rem;">
+          <button class="btn">Upload New Document</button>
+        </div>
+      </div>
+      
+      <div style="margin-top: 2rem; text-align: center;">
+        <button class="btn" style="padding: 1rem 2rem;">Save Profile</button>
+      </div>
+    </section>
+
+    <!-- Settings Section -->
+    <section id="settings">
+      <h2>Account Settings</h2>
+      <p>Manage your account preferences and security settings.</p>
+      
+      <div class="settings-section">
+        <h3>Appearance</h3>
+        <div class="settings-option">
+          <div>
+            <h4>Dark Mode</h4>
+            <p class="description">Toggle between light and dark theme</p>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="dark-mode-toggle">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      
+      <div class="settings-section">
+        <h3>Language & Region</h3>
+        <div class="settings-option">
+          <div>
+            <h4>Language</h4>
+            <p class="description">Select your preferred language</p>
+          </div>
+          <div class="language-selector">
+            <div class="language-option active">English</div>
+            <div class="language-option">Kinyarwanda</div>
+            <div class="language-option">French</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="settings-section">
+        <h3>Notifications</h3>
+        <div class="notification-settings">
+          <div class="notification-item">
+            <div>
+              <h4>Application Updates</h4>
+              <p class="description">Get notified about your application status</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+          
+          <div class="notification-item">
+            <div>
+              <h4>Scholarship Opportunities</h4>
+              <p class="description">Receive alerts about new scholarships</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+          
+          <div class="notification-item">
+            <div>
+              <h4>University Deadlines</h4>
+              <p class="description">Reminders about approaching deadlines</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+          
+          <div class="notification-item">
+            <div>
+              <h4>Newsletter</h4>
+              <p class="description">Monthly updates and educational content</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="settings-section">
+        <h3>Account Security</h3>
+        <div class="settings-option">
+          <div>
+            <h4>Change Password</h4>
+            <p class="description">Update your account password</p>
+          </div>
+          <button class="btn btn-secondary">Change</button>
+        </div>
+        
+        <div class="settings-option">
+          <div>
+            <h4>Two-Factor Authentication</h4>
+            <p class="description">Add an extra layer of security to your account</p>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>
+        
+        <div class="settings-option">
+          <div>
+            <h4>Connected Devices</h4>
+            <p class="description">View and manage devices logged into your account</p>
+          </div>
+          <button class="btn btn-secondary">Manage</button>
+        </div>
+      </div>
+      
+      <div class="settings-section">
+        <h3>Privacy Settings</h3>
+        <div class="settings-option">
+          <div>
+            <h4>Profile Visibility</h4>
+            <p class="description">Control who can see your profile information</p>
+          </div>
+          <select>
+            <option>Public</option>
+            <option>Only universities I apply to</option>
+            <option>Private</option>
+          </select>
+        </div>
+        
+        <div class="settings-option">
+          <div>
+            <h4>Data Sharing</h4>
+            <p class="description">Allow universities to contact you with opportunities</p>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      
+      <div class="account-delete">
+        <h3>Danger Zone</h3>
+        <p>Permanently delete your account and all associated data.</p>
+        <a href="#delete-account">Delete My Account</a>
+      </div>
+    </section>
+
+    <!-- Scholarship Opportunities Section -->
+    <section id="scholarships">
+      <h2>Scholarship Opportunities</h2>
+      <p>Browse available scholarships that match your profile and application status.</p>
+      
+      <div class="university-grid">
+        <div class="university">
+          <img src="logos/yale.png" alt="Yale Logo">
+          <div class="university-content">
+            <h3>Yale International Scholarship</h3>
+            <p><strong>Amount:</strong> Full tuition + stipend</p>
+            <p><strong>Deadline:</strong> Jan 15, 2025</p>
+            <p><strong>Eligibility:</strong> SAT > 1400, Leadership</p>
+            <a href="#scholarship-yale" class="btn" style="display: block; text-align: center; margin-top: 1rem;">Apply Now</a>
+          </div>
+        </div>
+        
+        <div class="university">
+          <img src="logos/alu.png" alt="ALU Logo">
+          <div class="university-content">
+            <h3>ALU African Leaders Scholarship</h3>
+            <p><strong>Amount:</strong> 50-100% tuition</p>
+            <p><strong>Deadline:</strong> Rolling</p>
+            <p><strong>Eligibility:</strong> Entrepreneurial spirit</p>
+            <a href="#scholarship-alu" class="btn" style="display: block; text-align: center; margin-top: 1rem;">Apply Now</a>
+          </div>
+        </div>
+        
+        <div class="university">
+          <img src="logos/poland.png" alt="Polish Universities">
+          <div class="university-content">
+            <h3>Polish Government Scholarship</h3>
+            <p><strong>Amount:</strong> Full tuition + housing</p>
+            <p><strong>Deadline:</strong> Mar 1, 2025</p>
+            <p><strong>Eligibility:</strong> STEM fields</p>
+            <a href="#scholarship-poland" class="btn" style="display: block; text-align: center; margin-top: 1rem;">Apply Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-links">
+        <a href="#about">About Us</a>
+        <a href="#partners">Partners</a>
+        <a href="#contact">Contact</a>
+        <a href="#faq">FAQ</a>
+        <a href="#privacy">Privacy Policy</a>
+      </div>
+      
+      <div class="social-icons">
+        <a href="#facebook"><i class="fab fa-facebook"></i></a>
+        <a href="#twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#linkedin"><i class="fab fa-linkedin"></i></a>
+      </div>
+      
+      <p>&copy; 2025 EduLink Rwanda. All rights reserved.</p>
+      <p>Empowering Rwandan students to access global education opportunities.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check if user is logged in (for demo purposes)
+      const isLoggedIn = false; // Change to true to see the main app
+      
+      const loginPage = document.getElementById('login-page');
+      const mainApp = document.getElementById('main-app');
+      
+      if (isLoggedIn) {
+        loginPage.style.display = 'none';
+        mainApp.style.display = 'block';
+      } else {
+        loginPage.style.display = 'block';
+        mainApp.style.display = 'none';
+      }
+      
+      // Login/Register tabs
+      const tabs = document.querySelectorAll('.login-tab');
+      const forms = document.querySelectorAll('.login-form');
+      
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          const tabId = this.getAttribute('data-tab');
+          
+          tabs.forEach(t => t.classList.remove('active'));
+          forms.forEach(f => f.classList.remove('active'));
+          
+          this.classList.add('active');
+          document.getElementById(`${tabId}-form`).classList.add('active');
+        });
+      });
+      
+      // Dark mode toggle
+      const darkModeToggle = document.getElementById('dark-mode-toggle');
+      darkModeToggle.addEventListener('change', function() {
+        document.body.classList.toggle('dark-mode', this.checked);
+        localStorage.setItem('darkMode', this.checked);
+      });
+      
+      // Check for saved dark mode preference
+      if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkModeToggle.checked = true;
+      }
+      
+      // Language selection
+      const languageOptions = document.querySelectorAll('.language-option');
+      languageOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          languageOptions.forEach(opt => opt.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+      
+      // Login form submission
+      const loginForm = document.getElementById('login-form').querySelector('form');
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // In a real app, you would validate and send to server
+        loginPage.style.display = 'none';
+        mainApp.style.display = 'block';
+      });
+      
+      // Register form submission
+      const registerForm = document.getElementById('register-form').querySelector('form');
+      registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // In a real app, you would validate and send to server
+        alert('Account created successfully! Please login.');
+        tabs[0].click();
+      });
+      
+      // Tab navigation
+      const navLinks = document.querySelectorAll('nav a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          document.querySelector(targetId).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+      
+      // Filter buttons
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+      
+      // Simulate document upload
+      const uploadBtns = document.querySelectorAll('.document-actions .edit-btn');
+      uploadBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          alert('Please select a new file to replace this document.');
+        });
+      });
+      
+      // Sidebar navigation
+      const sidebarLinks = document.querySelectorAll('.sidebar-menu a');
+      sidebarLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          sidebarLinks.forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+          
+          const targetId = this.getAttribute('href');
+          document.querySelector(targetId).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
