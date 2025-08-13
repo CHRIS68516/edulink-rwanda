@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduLink Rwanda</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* Previous CSS remains the same, adding new styles for login modal */
+    
+    /* Login Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+    
+    .modal-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: 2rem;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      animation: modalopen 0.3s;
+    }
+    
+    @keyframes modalopen {
+      from {opacity: 0; transform: translateY(-50px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .close:hover {
+      color: black;
+    }
+    
+    .login-form .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .login-form label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    
+    .login-form input {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    
+    .login-form button {
+      width: 100%;
+      padding: 1rem;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    
+    .login-form button:hover {
+      background-color: #008a43;
+    }
+    
+    .login-links {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    
+    .login-links a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    .login-links a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Settings Page Styles */
+    .settings-section {
+      display: none;
+    }
+    
+    .settings-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .settings-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .settings-card h3 {
+      margin-bottom: 1rem;
+      color: var(--dark);
+    }
+    
+    .notification-settings label {
+      display: block;
+      margin-bottom: 1rem;
+      cursor: pointer;
+    }
+    
+    .notification-settings input {
+      margin-right: 0.5rem;
+    }
+    
+    /* Application Submitted Message */
+    .application-submitted {
+      display: none;
+      background-color: #D1FAE5;
+      color: #065F46;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>EduLink Rwanda</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#universities">Universities</a>
+      <a href="#applications">Applications</a>
+      <a href="#profile">Profile</a>
+      <a href="#scholarships">Scholarships</a>
+    </nav>
+    <div class="user-menu">
+      <div class="user-avatar" id="userAvatar">JD</div>
+      <button id="loginBtn" class="btn btn-secondary">Login</button>
+      <button id="logoutBtn" class="btn" style="display: none;">Logout</button>
+    </div>
+  </header>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Login to Your Account</h2>
+      <form class="login-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" required>
+        </div>
+        <button type="submit">Login</button>
+        <div class="login-links">
+          <a href="#forgot-password">Forgot password?</a>
+          <span> | </span>
+          <a href="#register">Create account</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dashboard Section (Visible after login) -->
+  <section id="dashboard" class="dashboard-section" style="display: none;">
+    <!-- Previous dashboard content remains the same -->
+  </section>
+
+  <!-- Application Submitted Message -->
+  <div id="applicationSubmitted" class="application-submitted">
+    <h3><i class="fas fa-check-circle"></i> Application Submitted Successfully!</h3>
+    <p>Your application has been received. You'll be notified when the university reviews your materials.</p>
+  </div>
+
+  <!-- Settings Section -->
+  <section id="settings" class="settings-section">
+    <h2>Account Settings</h2>
+    
+    <div class="settings-options">
+      <div class="settings-card">
+        <h3>Personal Information</h3>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" value="Teta Gaella">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" value="tetagaella@gmail.com">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" value="+250 7885 2338">
+        </div>
+        <button class="btn">Update Information</button>
+      </div>
+      
+      <div class="settings-card">
+        <h3>Change Password</h3>
+        <div class="form-group">
+          <label>Current Password</label>
+          <input type="password">
+        </div>
+        <div class="form-group">
+          <label>New Password</label>
+          <input type="password">
+        </div>
+        <div class="form-group">
+          <label>Confirm New Password</label>
+          <input type="password">
+        </div>
+        <button class="btn">Change Password</button>
+      </div>
+      
+      <div class="settings-card notification-settings">
+        <h3>Notification Preferences</h3>
+        <label>
+          <input type="checkbox" checked> Application Status Updates
+        </label>
+        <label>
+          <input type="checkbox" checked> Scholarship Opportunities
+        </label>
+        <label>
+          <input type="checkbox" checked> University Deadlines
+        </label>
+        <label>
+          <input type="checkbox"> Newsletter
+        </label>
+        <button class="btn" style="margin-top: 1rem;">Save Preferences</button>
+      </div>
+      
+      <div class="settings-card">
+        <h3>Account Security</h3>
+        <p>Last login: Today at 10:30 AM from Kigali, Rwanda</p>
+        <button class="btn" style="margin-top: 1rem;">View Login History</button>
+        <button class="btn" style="margin-top: 1rem; background-color: var(--danger);">Deactivate Account</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Previous sections remain the same until the scholarships section -->
+
+  <script>
+    // Enhanced JavaScript for the new features
+    document.addEventListener('DOMContentLoaded', function() {
+      // Login Modal Functionality
+      const modal = document.getElementById('loginModal');
+      const loginBtn = document.getElementById('loginBtn');
+      const logoutBtn = document.getElementById('logoutBtn');
+      const closeBtn = document.querySelector('.close');
+      const dashboardSection = document.querySelector('.dashboard-section');
+      const userAvatar = document.getElementById('userAvatar');
+      
+      // Show login modal
+      loginBtn.addEventListener('click', function() {
+        modal.style.display = 'block';
+      });
+      
+      // Close modal
+      closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+      });
+      
+      // Close modal when clicking outside
+      window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+      
+      // Login form submission (simulated)
+      document.querySelector('.login-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        modal.style.display = 'none';
+        loginBtn.style.display = 'none';
+        logoutBtn.style.display = 'inline-block';
+        dashboardSection.style.display = 'block';
+        userAvatar.style.display = 'flex';
+      });
+      
+      // Logout functionality
+      logoutBtn.addEventListener('click', function() {
+        loginBtn.style.display = 'inline-block';
+        logoutBtn.style.display = 'none';
+        dashboardSection.style.display = 'none';
+        userAvatar.style.display = 'none';
+      });
+      
+      // Connect Apply Now buttons to official university application links
+      document.querySelectorAll('a[href="#apply-yale"]').forEach(btn => {
+        btn.href = 'https://admissions.yale.edu/apply';
+        btn.target = '_blank';
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.getElementById('applicationSubmitted').style.display = 'block';
+          window.open(this.href, '_blank');
+        });
+      });
+      
+      document.querySelectorAll('a[href="#apply-oxford"]').forEach(btn => {
+        btn.href = 'https://www.ox.ac.uk/admissions/undergraduate/applying-to-oxford';
+        btn.target = '_blank';
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.getElementById('applicationSubmitted').style.display = 'block';
+          window.open(this.href, '_blank');
+        });
+      });
+      
+      document.querySelectorAll('a[href="#apply-alu"]').forEach(btn => {
+        btn.href = 'https://alueducation.com/apply/';
+        btn.target = '_blank';
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.getElementById('applicationSubmitted').style.display = 'block';
+          window.open(this.href, '_blank');
+        });
+      });
+      
+      document.querySelectorAll('a[href="#apply-warsaw"]').forEach(btn => {
+        btn.href = 'https://rekrutacja.uw.edu.pl/en/';
+        btn.target = '_blank';
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.getElementById('applicationSubmitted').style.display = 'block';
+          window.open(this.href, '_blank');
+        });
+      });
+      
+      // Connect scholarship application buttons
+      document.querySelectorAll('a[href="#scholarship-yale"]').forEach(btn => {
+        btn.href = 'https://admissions.yale.edu/financial-aid';
+        btn.target = '_blank';
+      });
+      
+      document.querySelectorAll('a[href="#scholarship-alu"]').forEach(btn => {
+        btn.href = 'https://alueducation.com/scholarships/';
+        btn.target = '_blank';
+      });
+      
+      document.querySelectorAll('a[href="#scholarship-poland"]').forEach(btn => {
+        btn.href = 'https://www.study.gov.pl/scholarships';
+        btn.target = '_blank';
+      });
+      
+      // Navigation to settings
+      document.querySelector('a[href="#settings"]').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector('.settings-section').style.display = 'block';
+        document.querySelector('.dashboard-section').style.display = 'none';
+      });
+      
+      // Previous JavaScript remains the same
+    });
+  </script>
+</body>
+</html>
